@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Геннадий Кужельный](https://up.htmlacademy.ru/javascript/11/user/194715).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Безуглый](https://htmlacademy.ru/profile/shalfey41).
 
 ---
 
