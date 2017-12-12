@@ -22,7 +22,7 @@ var randomArray = function(array) {
 };
 // Создание нового элемента DOM из строки HTML с использованием встроенных методов DOM или прототипа
 // объявление переменных
-var hotelTitles = ['Большая уютная квартира", "Маленькая неуютная квартира', 'Маленький ужасный дворец',
+var hotelTitles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Маленький ужасный дворец',
 'Огромный прекрасный дворец',
 'Красивый гостевой домик',
 'Некрасивый негостеприимный домик',
@@ -37,7 +37,7 @@ var hotelFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'con
 // Маасив из 8 js объектов
 var hotels = [];
 
-// Цикл возвращает объект
+// Цикл возвращает массив объектов
 for (var i = 0; i < 8; i++) {
 	var loc = {
 		x: getRandomInt(300, 900),
@@ -88,37 +88,37 @@ mapPins.appendChild(fragment);
 var mapTemplate = document.querySelector('template').content;
 
 var mapTemplateCopy = mapTemplate.cloneNode(true);
-mapTemplateCopy.querySelector('h3').textContent = hotels[1].offer.title;
-mapTemplateCopy.querySelector('p').textContent = hotels[1].offer.address;
-mapTemplateCopy.querySelector('.popup__price').textContent = hotels[1].offer.price + '₽/ночь';
+mapTemplateCopy.querySelector('h3').textContent = hotels[0].offer.title;
+mapTemplateCopy.querySelector('p').textContent = hotels[0].offer.address;
+mapTemplateCopy.querySelector('.popup__price').textContent = hotels[0].offer.price + '₽/ночь';
 
 var typeBuilding = mapTemplateCopy.querySelector('h4');
-if (hotels[1].offer.type === 'flat') {
+if (hotels[0].offer.type === 'flat') {
   typeBuilding.textContent = 'Квартира';
-} else if (hotels[1].offer.type === 'bungalo') {
+} else if (hotels[0].offer.type === 'bungalo') {
   typeBuilding.textContent = 'Бунгало';
 } else {
   typeBuilding.textContent = 'Дом';
 }
 
 var nextString = typeBuilding.nextElementSibling;
-nextString.textContent = hotels[1].offer.rooms + ' для ' + hotels[1].offer.guests + ' гостей';
-nextString.nextElementSibling.textContent = 'Заезд после ' + hotels[1].offer.checkin + ', выезд до ' + hotels[1].offer.checkout;
+nextString.textContent = hotels[0].offer.rooms + ' для ' + hotels[0].offer.guests + ' гостей';
+nextString.nextElementSibling.textContent = 'Заезд после ' + hotels[0].offer.checkin + ', выезд до ' + hotels[0].offer.checkout;
 
 var popupFeatures = mapTemplateCopy.querySelector('.popup__features');
 
 for ( i = 0; i < popupFeatures.children.length; i++) {
   popupFeatures.children[i].style.display = 'none';
-  for (var j = 0; j < hotels[1].offer.features.length; j++) {
-    var classElement = 'feature--' + hotels[1].offer.features[j];
+  for (var j = 0; j < hotels[0].offer.features.length; j++) {
+    var classElement = 'feature--' + hotels[0].offer.features[j];
     if (popupFeatures.children[i].classList.contains(classElement)) {
       popupFeatures.children[i].style.display = 'inline-block';
     }
   }
 }
 
-popupFeatures.nextElementSibling.textContent = hotels[1].offer.description;
+popupFeatures.nextElementSibling.textContent = hotels[0].offer.description;
 
-mapTemplateCopy.querySelector('.popup__avatar').src = hotels[1].author.avatar;
+mapTemplateCopy.querySelector('.popup__avatar').src = hotels[0].author.avatar;
 
 document.querySelector('.map').appendChild(mapTemplateCopy);
