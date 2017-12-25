@@ -11,11 +11,10 @@ var randomElement = function(elements) {
 };
 
 var randomArray = function(array) {
-  var arr = array.slice();
-  var len = getRandomInt(1, arr.length);
+  var len = getRandomInt(1, array.length);
   var result = [];
   for (var i = 0; i < len; i++) {
-    var el = randomElement(arr);
+    var el = randomElement(array);
     result.push(el);
   };
   return result;
@@ -70,16 +69,14 @@ document.querySelector('.map').classList.remove('map--faded');
 var mapPins = document.querySelector('.map__pins');
 var fragment = document.createDocumentFragment();
 var mapTemplate = document.querySelector('template').content;
-var buttonTemplate = document.querySelector('button');
+
 for (i = 0; i < hotels.length; i++) {
-  var button = buttonTemplate.cloneNode(true);
-  button.classList.add('map__pin');
+  var button = mapTemplate.querySelector('.map__pin').cloneNode(true);
   button.style.left = hotels[i].location.x + 'px';
   button.style.top = hotels[i].location.y + 'px';
   button.querySelector('img').src = hotels[i].author.avatar;
   fragment.appendChild(button);
 };
-
 mapPins.appendChild(fragment);
 
 var mapTemplateCopy = mapTemplate.querySelector('article').cloneNode(true);
