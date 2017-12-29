@@ -64,8 +64,6 @@ for (var i = 0; i < 8; i++) {
   });
 };
 
-document.querySelector('.map').classList.remove('map--faded');
-
 var mapPins = document.querySelector('.map__pins');
 var fragment = document.createDocumentFragment();
 var mapTemplate = document.querySelector('template').content;
@@ -77,12 +75,15 @@ for (i = 0; i < hotels.length; i++) {
   button.querySelector('img').src = hotels[i].author.avatar;
   fragment.appendChild(button);
 };
-mapPins.appendChild(fragment);
+
 
 var mapTemplateCopy = mapTemplate.querySelector('article').cloneNode(true);
 mapTemplateCopy.querySelector('h3').textContent = hotels[0].offer.title;
 mapTemplateCopy.querySelector('p small').textContent = hotels[0].offer.address;
 mapTemplateCopy.querySelector('.popup__price').textContent = hotels[0].offer.price + '₽/ночь';
+mapTemplateCopy.querySelector('.rooms-for-guests').textContent = hotels[0].offer.rooms + ' для ' + hotels[0].offer.guests + ' гостей';
+mapTemplateCopy.querySelector('.mode').textContent = 'Заезд после ' + hotels[0].offer.checkin + ', выезд до ' + hotels[0].offer.checkout;
+
 
 var typeBuilding = mapTemplateCopy.querySelector('h4');
 if (hotels[0].offer.type === 'flat') {
@@ -93,8 +94,6 @@ if (hotels[0].offer.type === 'flat') {
   typeBuilding.textContent = 'Дом';
 };
 
-mapTemplateCopy.querySelector('.rooms-for-guests').textContent = hotels[0].offer.rooms + ' для ' + hotels[0].offer.guests + ' гостей';
-mapTemplateCopy.querySelector('.mode').textContent = 'Заезд после ' + hotels[0].offer.checkin + ', выезд до ' + hotels[0].offer.checkout;
 
 var popupFeatures = mapTemplateCopy.querySelector('.popup__features');
 var filtersContainer = document.querySelector('.map__filters-container');
@@ -113,7 +112,6 @@ mapTemplateCopy.querySelector('.description-hotels').textContent = hotels[0].off
 mapTemplateCopy.querySelector('.popup__avatar').src = hotels[0].author.avatar;
 
 document.querySelector('.map').insertBefore(mapTemplateCopy, filtersContainer);
-
 var noActivForm = document.querySelector('.notice__form');
 noActivForm.classList.add('notice__form--disabled');
 var disableForm = document.querySelectorAll('fieldset');
@@ -163,8 +161,8 @@ var closePopup = function() {
   popup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
-var mapPin = document.querySelectorAll('.map__pin');
-for (var i = 0; i < hotels.length; i++) {
+var mapPin = mapPins.querySelectorAll('.map__pin');
+for ( i = 0; i < hotels.length; i++) {
   mapPin[i].addEventListener('click', function() {
     openPopup();
     mapPin[i].classList.add('map__pin--active');
@@ -176,3 +174,9 @@ for (var i = 0; i < hotels.length; i++) {
     }
   });
 };
+/*for (i = 0; i < hotels.length; i++){
+mapPin[i].addEventListener('click', function() {
+  mapPin[i].classList.add('map__pin--active');
+  openPopup();
+});
+};*/
